@@ -1,5 +1,6 @@
 # CredSaathi
-Loan amd Banking related agentic ai project 
+Loan and Banking related agentic ai project:
+
 Team name – SyntaxErr
 Project – Cred Saathi
 Hriddhiman – Frontend(react)
