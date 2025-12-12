@@ -24,12 +24,3 @@ Hriddhiman – Frontend(Next.js), UI/UX<br>
 Shorya – presentation, logo, AI agents<br>
 Shreejan – AI agents<br>
 Yasin – Backend , AI agent integration , database<br>
-# CredSaathi
-Loan and Banking related agentic ai project:
-
-- Team name – SyntaxErr
-- Project – Cred Saathi
-- Hriddhiman – Frontend(react)
-- Shorya- (ppt ,logo,ai agents)
-- Shreejan – Ai agents
-- Yasin – Backend , ai agent integration , database
