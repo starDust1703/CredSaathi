@@ -1,13 +1,19 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SideBar from "../components/SideBar";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
+import { SignOutButton } from "@clerk/nextjs";
+import { UserButton } from "@clerk/nextjs";
 
 const Home = () => {
   const chatId = useSearchParams().get("id");
+  const router = useRouter();
   const [sideBar, setSideBar] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [prompt, setPrompt] = useState("");
+  const [user, setUser] = useState(null);
+  const { isLoaded, isSignedIn } = useUser();
 
   const myChats = [
     {
@@ -76,6 +82,15 @@ const Home = () => {
   const initialChat = myChats.find((chat) => chat._id.toString() === chatId)?.["chats"] || [];
   const [messages, setMessages] = useState(initialChat);
 
+  // Load logged-in user and protect route
+ useEffect(() => {
+    if (isLoaded && !isSignedIn) {
+      router.replace("/sign-in");
+    }
+  }, [isLoaded, isSignedIn]);
+
+ 
+
   // Handle sending + receiving messages
   const handlePrompt = async () => {
 		if (!prompt) return;
@@ -119,11 +134,17 @@ const Home = () => {
 
       {showSettings && (
         <div>
-          <div className="w-70 bg-[#444444f3] rounded-2xl p-2 bottom-18 left-2.5 z-30 absolute">
+          <div className="w-70 bg-[#444444f3] rounded-2xl p-2 bottom-18 left-2.5 z-30 absolute flex flex-col gap-2">
             <p className="p-2 cursor-pointer hover:bg-[#81818146] rounded-xl z-40">Documents</p>
             <p className="p-2 cursor-pointer hover:bg-[#81818146] rounded-xl z-40">Settings</p>
-            <p className="p-2 cursor-pointer hover:bg-[#81818146] rounded-xl z-40">Log out</p>
+
+            {/* Clerk User Button inside menu */}
+            <div className="p-2 hover:bg-[#81818146] rounded-xl z-40 flex items-center">
+              <UserButton afterSignOutUrl="/sign-in" />
+            </div>
           </div>
+
+          {/* backdrop to close menu */}
           <div
             className="h-full w-full absolute z-10 top-0"
             onClick={() => setShowSettings(false)}
@@ -140,7 +161,7 @@ const Home = () => {
             setSideBar(!sideBar);
           }}
         />
-        <span className="text-2xl font-semibold">Cred Saathi</span>
+        
       </div>
 
       <main
