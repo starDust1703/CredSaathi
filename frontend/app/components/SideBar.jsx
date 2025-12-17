@@ -2,14 +2,14 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const SideBar = ({ sideBar, setSideBar, showSettings, setShowSettings }) => {
+const SideBar = ({ sideBar, setSideBar, showSettings, setShowSettings, setOpenUpdateBtn }) => {
   const router = useRouter();
 
-  const [showChats, setShowChats] = useState(false);
+  const [showChats, setShowChats] = useState(true);
   const currUser = {
     user: "hriddhiman@xyz.com",
     dp: "/logo2.jpg",
-    name: "Hriddhiman"
+    name: "Amit"
   }
   const myChats = [
     {
@@ -97,6 +97,7 @@ const SideBar = ({ sideBar, setSideBar, showSettings, setShowSettings }) => {
         <div className='h-full overflow-y-auto p-2'>
           <Btn icon={'pencil.svg'} text={'New Chat'} 
           clickHandler={() => {router.push('/home'), setSideBar(false)} } />
+          <Btn icon={'update.svg'} imgWidth={5} text={'Update Details'} clickHandler={() => setOpenUpdateBtn(true)} />
           <Btn icon={'search.svg'} imgWidth={5} text={'Search Chats'} />
 
           <div className='p-1 px-2 flex items-center cursor-pointer gap-2 mt-4 w-full text-[#afafaf]' onClick={() => setShowChats(!showChats)}>

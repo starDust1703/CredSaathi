@@ -64,8 +64,6 @@ To upload salary slip -
 Downloading sanction letter - 
 `curl http://localhost:8000/download-sanction-letter/YOUR_SESSION_ID --output sanction_letter.pdf`
 
-
-
 ## About Us:
 Team – SyntaxErr<br>
 Project – Cred Saathi<br>
